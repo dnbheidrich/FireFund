@@ -18,6 +18,16 @@ namespace Keepr.Services
             return _repo.Get(userId);
         }
 
+           public Room GetById(int id, string userId)
+        {
+            Room found = _repo.GetById(id, userId);
+            if (found == null)
+            {
+                throw new Exception("Invalid Id");
+            }
+            return found;
+        }
+
         public Room Create(Room newRoom)
         {
             return _repo.Create(newRoom);

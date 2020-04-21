@@ -21,6 +21,13 @@ namespace Keepr.Repositories
             return _db.Query<Room>(sql, new { UserId });
         }
 
+
+   public Room GetById(int Id, string userId)
+        {
+            string sql = "SELECT * FROM rooms WHERE id = @Id AND userId = @UserId";
+            return _db.QueryFirstOrDefault<Room>(sql, new { Id, userId });
+        }
+
         internal Room Create(Room newRoom)
         {
            string sql =  @"

@@ -36,6 +36,22 @@ namespace Keepr.Controllers
             }
         }
 
+        [HttpGet("{id}")]
+        [Authorize]
+        public ActionResult<Room> GetById(int id)
+        {
+            try
+            {
+                string userId = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+                return Ok(_rs.GetById(id, userId));
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
+
+
         [HttpPost]
         [Authorize]
         public ActionResult<Room> Post([FromBody] Room newRoom)
