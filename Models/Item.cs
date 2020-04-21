@@ -9,8 +9,8 @@ namespace Keepr.Models
         public string ImgUrl { get; set; }
         public int CategoryId { get; set; }
         public int Quantity { get; set; }
-        public int Acv { get; set; }
-        public int Rcv { get; set; }
+        public decimal Acv { get; set; }
+        public decimal Rcv { get; set; }
 
     }
   

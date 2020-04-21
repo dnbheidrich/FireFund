@@ -17,7 +17,8 @@ let api = Axios.create({
 
 export default new Vuex.Store({
   state: {
-    publicKeeps: []
+    rooms: [],
+    activeRoom:{}
   },
   mutations: {},
   actions: {
