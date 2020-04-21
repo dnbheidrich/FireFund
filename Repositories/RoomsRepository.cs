@@ -15,19 +15,19 @@ namespace Keepr.Repositories
             _db = db;
         }
 
-        internal IEnumerable<Room> Get()
+         internal IEnumerable<Room> Get(string UserId)
         {
-            string sql = "SELECT * FROM rooms";
-            return _db.Query<Room>(sql);
+            string sql = "SELECT * FROM rooms WHERE userId = @UserId";
+            return _db.Query<Room>(sql, new { UserId });
         }
 
         internal Room Create(Room newRoom)
         {
            string sql =  @"
             INSERT INTO rooms
-            (name, description, imgUrl)
+            (name, userId, description, imgUrl)
             VALUES
-            (@Name, @Description, @ImgUrl);
+            (@Name, @UserId, @Description, @ImgUrl);
             SELECT LAST_INSERT_ID();
             ";
             int id = _db.ExecuteScalar<int>(sql, newRoom);

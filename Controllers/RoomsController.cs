@@ -21,16 +21,19 @@ namespace Keepr.Controllers
             _rs = rs;
         }
         [HttpGet]
+        [Authorize]
+
         public ActionResult<IEnumerable<Room>> Get()
         {
-            try
+           try
             {
-                return Ok(_rs.Get());
+                string userId = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+                return Ok(_rs.Get(userId));
             }
             catch (Exception e)
             {
                 return BadRequest(e.Message);
-            };
+            }
         }
 
         [HttpPost]
