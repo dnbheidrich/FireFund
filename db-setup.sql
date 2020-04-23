@@ -4,6 +4,7 @@
 --     id int NOT NULL AUTO_INCREMENT,
 --     name VARCHAR(255) NOT NULL,
 --     description VARCHAR(255) NOT NULL,
+--     imgUrl varchar(255),
 --     userId VARCHAR(255),
 --     INDEX userId (userId),
 --     PRIMARY KEY (id)
@@ -15,6 +16,7 @@
 --     name VARCHAR(255) NOT NULL,
 --     description VARCHAR(255),
 --     roomId INT NOT NULL,
+--     imgUrl varchar(255),
 --     userId VARCHAR(255),
 --     INDEX userId (userId),
 --     PRIMARY KEY (id),
@@ -41,19 +43,7 @@
 --         ON DELETE CASCADE
 -- );
 
---  CREATE TABLE categories (
---     id INT NOT NULL AUTO_INCREMENT,
---     name VARCHAR(255) NOT NULL,
---     description VARCHAR(255),
---     categoryId INT NOT NULL,
---     userId VARCHAR(255),
---     INDEX userId (userId),
---     PRIMARY KEY (id),
---     FOREIGN KEY (roomId)
---       REFERENCES rooms(id)
---         ON DELETE CASCADE
--- )
--- ALTER TABLE rooms
+-- ALTER TABLE categories
 -- ADD imgUrl varchar(255);
 
 -- -- USE THIS TO CLEAN OUT YOUR DATABASE
