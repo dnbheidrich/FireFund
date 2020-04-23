@@ -41,5 +41,26 @@ namespace Keepr.Repositories
             newRoom.Id = id;
             return newRoom; 
         }
+
+        public Room Edit(Room updatedRoom)
+        {
+            string sql = @"
+            UPDATE rooms
+            SET
+                name = @Name,
+                description = @Description,
+                imgUrl  = @ImgUrl
+            WHERE id = @Id;
+            ";
+            _db.Execute(sql, updatedRoom);
+            return updatedRoom;
+        }
+
+         internal bool Delete(int Id)
+        {
+            string sql = "DELETE FROM rooms WHERE id = @Id LIMIT 1";
+            int removed = _db.Execute(sql, new { Id });
+            return removed == 1;
+        }
     }
 }

@@ -68,5 +68,39 @@ namespace Keepr.Controllers
             }
         }
 
+        [HttpPut("{id}")]
+        [Authorize]
+        public ActionResult<Room> Edit(int id, [FromBody] Room updatedRoom)
+        {
+            try
+            {
+                string userId = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+                // NOTE DONT TRUST THE USER TO TELL YOU WHO THEY ARE!!!!
+                updatedRoom.UserId = userId;
+                updatedRoom.Id = id;
+                return Ok(_rs.Edit(updatedRoom));
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
+
+        [HttpDelete("{id}")]
+        [Authorize]
+        public ActionResult<Room> Delete(int id)
+        {
+            try
+            {
+                string userId = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+                // NOTE DONT TRUST THE USER TO TELL YOU WHO THEY ARE!!!!
+                return Ok(_rs.Delete(id, userId));
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
+
     }
 }

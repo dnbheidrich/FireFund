@@ -32,5 +32,32 @@ namespace Keepr.Services
         {
             return _repo.Create(newRoom);
         }
+
+         internal Room Edit(Room updatedRoom)
+        {
+            Room found = GetById(updatedRoom.Id, updatedRoom.UserId);
+            if (found.UserId != updatedRoom.UserId)
+            {
+                throw new Exception("Invalid Request");
+            }
+            found.Name = updatedRoom.Name;
+            found.Description = updatedRoom.Description;
+            found.ImgUrl = updatedRoom.ImgUrl != null ? updatedRoom.ImgUrl : found.ImgUrl;
+            return _repo.Edit(found);
+        }
+
+         internal Room Delete(int id, string userId)
+        {
+            Room found = GetById(id, userId);
+            if (found.UserId != userId)
+            {
+                throw new Exception("Invalid Request");
+            }
+            if (_repo.Delete(id))
+            {
+                return found;
+            }
+            throw new Exception("Something went terribly wrong");
+        }
     }
 }
