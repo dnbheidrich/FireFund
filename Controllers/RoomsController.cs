@@ -16,9 +16,12 @@ namespace Keepr.Controllers
     public class RoomsController : ControllerBase
     {
         private readonly RoomsService _rs;
-        public RoomsController(RoomsService rs)
+        private readonly CategoriesService _cs;
+
+        public RoomsController(RoomsService rs, CategoriesService cs)
         {
             _rs = rs;
+            _cs = cs;
         }
         [HttpGet]
         [Authorize]
@@ -50,6 +53,23 @@ namespace Keepr.Controllers
                 return BadRequest(e.Message);
             }
         }
+
+        [HttpGet("{id}/categories")]
+        [Authorize]
+
+        public ActionResult<IEnumerable<Category>> GetCategoriesByRoomId(int id)
+        {
+            try
+            {
+                 string userId = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+                return Ok(_cs.GetCategoriesByRoomId(id, userId));
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
+
 
 
         [HttpPost]

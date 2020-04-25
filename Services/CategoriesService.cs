@@ -28,6 +28,12 @@ namespace Keepr.Services
             return found;
         }
 
+          internal object GetCategoriesByRoomId(int id, string userId)
+    {
+            return _repo.GetCategoriesByRoomId(id, userId);
+      
+    }
+
         public Category Create(Category newCategory)
         {
             return _repo.Create(newCategory);
