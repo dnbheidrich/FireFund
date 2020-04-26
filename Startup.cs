@@ -65,6 +65,8 @@ namespace Keepr
             services.AddTransient<RoomsRepository>();
             services.AddTransient<CategoriesService>();
             services.AddTransient<CategoriesRepository>();
+             services.AddTransient<ItemsService>();
+            services.AddTransient<ItemsRepository>();
         }
 
         private IDbConnection CreateDbConnection()
