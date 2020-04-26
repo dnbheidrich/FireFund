@@ -16,9 +16,13 @@ namespace Keepr.Controllers
     public class CategoriesController : ControllerBase
     {
         private readonly CategoriesService _cs;
-        public CategoriesController(CategoriesService cs)
+        private readonly ItemsService _ls;
+
+        public CategoriesController(CategoriesService cs, ItemsService ls)
         {
             _cs = cs;
+            _ls = ls;
+
         }
         [HttpGet]
         [Authorize]
@@ -51,6 +55,21 @@ namespace Keepr.Controllers
             }
         }
 
+ [HttpGet("{id}/items")]
+        [Authorize]
+
+        public ActionResult<IEnumerable<Item>> GetItemsByCategoryId(int id)
+        {
+            try
+            {
+                 string userId = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+                return Ok(_ls.GetItemsByCategoryId(id, userId));
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
 
         [HttpPost]
         [Authorize]
