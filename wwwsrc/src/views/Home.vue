@@ -1,7 +1,11 @@
 <template>
-  <div class="home">
-    <h1>Welcome Home</h1>
+<div class="home container-fluid">
+  <div class="row text-center">
+    <div class="col-12">
+    <h1 class="text-warning">Welcome Home</h1>
+    </div>
   </div>
+</div>
 </template>
 
 <script>
