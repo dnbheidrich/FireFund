@@ -10,8 +10,22 @@
 
 <script>
 export default {
-  mounted() {},
-  computed: {}
+  mounted() {
+    this.getRooms();
+  },
+   methods:{
+     async getRooms(){
+      if(await this.$auth.isAuthenticated){
+      this.$store.dispatch("getMyRooms");
+    }
+  }
+  },
+  computed: {
+    rooms() {
+      return this.$store.state.rooms;
+    },
+  },
+ 
 };
 </script>
 

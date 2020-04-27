@@ -20,13 +20,21 @@ export default new Vuex.Store({
     rooms: [],
     activeRoom:{}
   },
-  mutations: {},
+  mutations: {
+    setRooms(state, rooms) {
+      state.rooms = rooms
+    },
+  },
   actions: {
     setBearer({}, bearer) {
       api.defaults.headers.authorization = bearer;
     },
     resetBearer() {
       api.defaults.headers.authorization = "";
-    }
+    },
+    async getMyRooms({ commit, dispatch }) {
+      let res = await api.get("rooms")
+      commit("setRooms", res.data)
+    },
   }
 });
