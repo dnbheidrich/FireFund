@@ -1,8 +1,13 @@
 <template>
   <div class="room component text-center">
   <div class="col-12">
+    router
      <div class="card">
+        <router-link
+        :to="{ name: 'RoomDetails', params: { roomId: this.roomData.id } }"
+      >
       <img :src="roomData.imgUrl" alt="">
+        </router-link>
       <div class="card-body">
         <h4 class="card-title">{{roomData.name}}</h4>
         <p class="card-text">{{roomData.description}}</p>
