@@ -24,6 +24,9 @@ export default new Vuex.Store({
     setRooms(state, rooms) {
       state.rooms = rooms
     },
+    addRoom(state, newRoom) {
+      state.rooms.push(newRoom)
+    },
   },
   actions: {
     setBearer({}, bearer) {
@@ -35,6 +38,14 @@ export default new Vuex.Store({
     async getMyRooms({ commit, dispatch }) {
       let res = await api.get("rooms")
       commit("setRooms", res.data)
+    },
+    async addRoom({commit, dispatch}, newRoom){
+      try {
+        let res = await api.post("rooms", newRoom )
+        commit("addRoom", res.data)
+      } catch (error) {
+        console.log(error);
+      }
     },
   }
 });
