@@ -9,6 +9,7 @@
 <script>
 export default {
   name: 'RoomDetails',
+  props: ["roomData"],
   data(){
     return {}
   },
