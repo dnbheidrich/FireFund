@@ -24,6 +24,9 @@ export default new Vuex.Store({
     setRooms(state, rooms) {
       state.rooms = rooms
     },
+    setActiveRoom(state, room) {
+      state.activeRoom = room;
+    },
     addRoom(state, newRoom) {
       state.rooms.push(newRoom)
     },
@@ -38,6 +41,18 @@ export default new Vuex.Store({
     async getMyRooms({ commit, dispatch }) {
       let res = await api.get("rooms")
       commit("setRooms", res.data)
+    },
+     async getRoomById({ commit, dispatch }, id) {
+      try {
+        let res = await api.get("rooms/" + id);
+        commit("setActiveRoom", res.data); 
+      } catch (error) {
+        console.error(error);
+        // router.push({ name: "Home" });
+      }
+    },
+    setActiveRoom({ commit }, room) {
+      commit("setActiveRoom", room);
     },
     async addRoom({commit, dispatch}, newRoom){
       try {
