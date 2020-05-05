@@ -2,6 +2,34 @@
   <div class="component">
 
 <h1 class="text-white">Welcome to {{activeRoom.name}}</h1>
+  <div class="row text-center">
+  <div class="col-12">
+
+
+
+<h1>Create Room</h1>
+<form @submit.prevent="addRoom">
+      <input
+        v-model="newRoom.Name"
+        type="text"
+        name="make"
+        placeholder="Name..."
+        
+      />
+      <input
+       v-model="newRoom.Description" required
+        type="text"
+        name="model"
+        placeholder="Description..."
+      />
+      <input
+      v-model="newRoom.ImgUrl"
+        type="text"
+        name="year"
+        placeholder="ImgUrl..."
+      />
+       <button type="submit" class="btn btn-success">Submit</button>
+    </form>
   </div>
 </template>
 
