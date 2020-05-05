@@ -2,28 +2,24 @@
   <div class="component">
 
 <h1 class="text-white">Welcome to {{activeRoom.name}}</h1>
-  <div class="row text-center">
-  <div class="col-12">
 
-
-
-<h1>Create Room</h1>
-<form @submit.prevent="addRoom">
+<h1>Create Category</h1>
+<form @submit.prevent="">
       <input
-        v-model="newRoom.Name"
+        v-model="newCategory.Name"
         type="text"
         name="make"
         placeholder="Name..."
         
       />
       <input
-       v-model="newRoom.Description" required
+       v-model="newCategory.Description" required
         type="text"
         name="model"
         placeholder="Description..."
       />
       <input
-      v-model="newRoom.ImgUrl"
+      v-model="newCategory.ImgUrl"
         type="text"
         name="year"
         placeholder="ImgUrl..."
@@ -40,10 +36,15 @@ export default {
   props: ["roomData"],
    mounted() {
      this.getRooms();
-     
   },
   data(){
-    return {}
+    return {
+       newCategory: {
+        Name: "",
+        Description: "",
+        ImgUrl: "",
+      },
+    }
   },
   computed:{
     room() {
