@@ -18,7 +18,9 @@ let api = Axios.create({
 export default new Vuex.Store({
   state: {
     rooms: [],
-    activeRoom:{}
+    activeRoom:{},
+    categories: [],
+    activeCategory:{}
   },
   mutations: {
     setRooms(state, rooms) {
@@ -29,6 +31,15 @@ export default new Vuex.Store({
     },
     addRoom(state, newRoom) {
       state.rooms.push(newRoom)
+    },
+    setCategories(state, rooms) {
+      state.rooms = rooms
+    },
+    setActiveCategory(state, room) {
+      state.activeCategory = room;
+    },
+    addCategory(state, newCategories) {
+      state.rooms.push(newCategories)
     },
   },
   actions: {
@@ -62,5 +73,31 @@ export default new Vuex.Store({
         console.log(error);
       }
     },
+    async getMyCategories({ commit, dispatch }) {
+      let res = await api.get("categories")
+      commit("setCategories", res.data)
+    },
+     async getCategoryById({ commit, dispatch }, id) {
+      try {
+        let res = await api.get("categories/" + id);
+        commit("setActiveCategory", res.data); 
+      } catch (error) {
+        console.error(error);
+        // router.push({ name: "Home" });
+      }
+    },
+    setActiveCategory({ commit }, categories) {
+      commit("setActiveCategory", categories);
+    },
+    async addCategory({commit, dispatch}, newCategory){
+      try {
+        let res = await api.post("categories", newCategory )
+        commit("addCategory", res.data)
+      } catch (error) {
+        console.log(error);
+      }
+    },
   }
 });
+
+

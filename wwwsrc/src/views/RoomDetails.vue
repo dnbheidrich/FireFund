@@ -4,7 +4,7 @@
 <h1 class="text-white">Welcome to {{activeRoom.name}}</h1>
 
 <h1>Create Category</h1>
-<form @submit.prevent="">
+<form @submit.prevent="addCategory">
       <input
         v-model="newCategory.Name"
         type="text"
@@ -35,7 +35,8 @@ export default {
   name: 'RoomDetails',
   props: ["roomData"],
    mounted() {
-     this.getRooms();
+    this.getRooms();
+    this.getCategories();
   },
   data(){
     return {
@@ -43,6 +44,7 @@ export default {
         Name: "",
         Description: "",
         ImgUrl: "",
+        RoomId: this.$route.params.roomId
       },
     }
   },
@@ -52,9 +54,21 @@ export default {
     },
     activeRoom(){
       return this.$store.state.activeRoom
-    }
+    },
+     categories() {
+      return this.$store.state.categories;
+    },
   },
   methods:{
+     addCategory() {
+       debugger
+      this.$store.dispatch("addCategory", this.newCategory);
+  },
+   async getCategories(){
+      if(await this.$auth.isAuthenticated){
+      this.$store.dispatch("getMyCategories");
+      }
+   },
      async getRooms(){
       if(await this.$auth.isAuthenticated){
       this.$store.dispatch("getMyRooms");
