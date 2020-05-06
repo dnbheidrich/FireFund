@@ -3,6 +3,8 @@ import Router from "vue-router";
 // @ts-ignore
 import Home from "./views/Home.vue";
 // @ts-ignore
+import RoomDetails from "./views/RoomDetails.vue";
+// @ts-ignore
 import Dashboard from "./views/Dashboard.vue";
 import { authGuard } from "@bcwdev/auth0-vue";
 
@@ -20,6 +22,12 @@ export default new Router({
       name: "dashboard",
       component: Dashboard,
       beforeEnter: authGuard
-    }
+    },
+    {
+      path: "/rooms/:roomId",
+      name: "RoomDetails",
+      component: RoomDetails,
+      beforeEnter: authGuard
+    },
   ]
 });
