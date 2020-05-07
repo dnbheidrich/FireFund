@@ -4,7 +4,7 @@
     router
      <div class="card">
         <router-link
-        :to="{ name: 'RoomDetails', params: { roomId: this.roomData.id.parseInt() } }"
+        :to="{ name: 'RoomDetails', params: { roomId: this.roomData.id } }"
       >
       <img :src="roomData.imgUrl" alt="">
         </router-link>

@@ -100,6 +100,7 @@ export default new Vuex.Store({
     },
     async addCategory({commit, dispatch}, newCategory){
       try {
+        debugger
         let res = await api.post("categories", newCategory )
         commit("addCategory", res.data)
       } catch (error) {
