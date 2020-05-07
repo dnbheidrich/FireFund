@@ -36,7 +36,7 @@ export default {
   props: ["roomData"],
    mounted() {
     this.getRooms();
-    this.getCategories();
+    // this.getCategories();
   },
   data(){
     return {
@@ -71,9 +71,9 @@ export default {
    },
      async getRooms(){
       if(await this.$auth.isAuthenticated){
-      this.$store.dispatch("getMyRooms");
-      if (!this.$store.state.rooms.length) {
       this.$store.dispatch("getRoomById", this.$route.params.roomId);
+        if (!this.$store.state.rooms.length) {
+      this.$store.dispatch("getCategoriesByRoomId", this.$route.params.roomId);
     } else {
       this.$store.dispatch(
       "setActiveRoom",
