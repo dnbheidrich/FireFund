@@ -26,11 +26,16 @@
       />
        <button type="submit" class="btn btn-success">Submit</button>
     </form>
+    <div class="row">
+      <categories v-for="categories in myCategories" :key="categories.id" :categoriesData="categories" />
+    </div>
   </div>
 </template>
 
 
 <script>
+import Categories from "../components/Categories"
+
 export default {
   name: 'RoomDetails',
   props: ["roomData"],
@@ -55,8 +60,8 @@ export default {
     activeRoom(){
       return this.$store.state.activeRoom
     },
-     categories() {
-      return this.$store.state.categories;
+     myCategories() {
+      return this.$store.state.categories.reverse();
     },
   },
   methods:{
@@ -83,7 +88,9 @@ export default {
       }
   }
   },
-  components:{}
+  components:{
+    Categories
+  }
 }
 </script>
 
