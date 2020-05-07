@@ -26,11 +26,16 @@
       />
        <button type="submit" class="btn btn-success">Submit</button>
     </form>
+    <div class="row">
+      <categories v-for="categories in myCategories" :key="categories.id" :categoriesData="categories" />
+    </div>
   </div>
 </template>
 
 
 <script>
+import Categories from "../components/Categories"
+
 export default {
   name: 'RoomDetails',
   props: ["roomData"],
@@ -55,25 +60,25 @@ export default {
     activeRoom(){
       return this.$store.state.activeRoom
     },
-     categories() {
-      return this.$store.state.categories;
+     myCategories() {
+      return this.$store.state.categories.reverse();
     },
   },
   methods:{
      addCategory() {
-       debugger
+      // RoomId comes in as string if reloaded on page
       this.$store.dispatch("addCategory", this.newCategory);
   },
    async getCategories(){
       if(await this.$auth.isAuthenticated){
-      this.$store.dispatch("getMyCategories");
+      this.$store.dispatch("getCategoriesByRoomId", this.$route.params.roomId);
       }
    },
      async getRooms(){
       if(await this.$auth.isAuthenticated){
-      this.$store.dispatch("getMyRooms");
-      if (!this.$store.state.rooms.length) {
       this.$store.dispatch("getRoomById", this.$route.params.roomId);
+        if (!this.$store.state.rooms.length) {
+      this.$store.dispatch("getMyRooms");
     } else {
       this.$store.dispatch(
       "setActiveRoom",
@@ -83,7 +88,9 @@ export default {
       }
   }
   },
-  components:{}
+  components:{
+    Categories
+  }
 }
 </script>
 

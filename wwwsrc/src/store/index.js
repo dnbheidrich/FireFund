@@ -33,7 +33,7 @@ export default new Vuex.Store({
       state.rooms.push(newRoom)
     },
     setCategories(state, rooms) {
-      state.rooms = rooms
+      state.categories = rooms
     },
     setActiveCategory(state, room) {
       state.activeCategory = room;
@@ -62,6 +62,15 @@ export default new Vuex.Store({
         // router.push({ name: "Home" });
       }
     },
+    async getCategoriesByRoomId({ commit, dispatch }, id) {
+      try {
+        let res = await api.get("rooms/" + id + "/categories");
+        commit("setCategories", res.data); 
+      } catch (error) {
+        console.error(error);
+        // router.push({ name: "Home" });
+      }
+    },
     setActiveRoom({ commit }, room) {
       commit("setActiveRoom", room);
     },
@@ -80,7 +89,7 @@ export default new Vuex.Store({
      async getCategoryById({ commit, dispatch }, id) {
       try {
         let res = await api.get("categories/" + id);
-        commit("setActiveCategory", res.data); 
+        commit("setCategories", res.data); 
       } catch (error) {
         console.error(error);
         // router.push({ name: "Home" });
@@ -91,6 +100,7 @@ export default new Vuex.Store({
     },
     async addCategory({commit, dispatch}, newCategory){
       try {
+        debugger
         let res = await api.post("categories", newCategory )
         commit("addCategory", res.data)
       } catch (error) {
