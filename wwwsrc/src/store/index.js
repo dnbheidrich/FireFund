@@ -33,7 +33,7 @@ export default new Vuex.Store({
       state.rooms.push(newRoom)
     },
     setCategories(state, rooms) {
-      state.rooms = rooms
+      state.categories = rooms
     },
     setActiveCategory(state, room) {
       state.activeCategory = room;
@@ -65,7 +65,7 @@ export default new Vuex.Store({
     async getCategoriesByRoomId({ commit, dispatch }, id) {
       try {
         let res = await api.get("rooms/" + id + "/categories");
-        commit("setActiveRoom", res.data); 
+        commit("setCategories", res.data); 
       } catch (error) {
         console.error(error);
         // router.push({ name: "Home" });

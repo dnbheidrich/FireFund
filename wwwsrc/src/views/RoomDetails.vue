@@ -36,7 +36,7 @@ export default {
   props: ["roomData"],
    mounted() {
     this.getRooms();
-    // this.getCategories();
+    this.getCategories();
   },
   data(){
     return {
@@ -66,14 +66,14 @@ export default {
   },
    async getCategories(){
       if(await this.$auth.isAuthenticated){
-      this.$store.dispatch("getMyCategories");
+      this.$store.dispatch("getCategoriesByRoomId", this.$route.params.roomId);
       }
    },
      async getRooms(){
       if(await this.$auth.isAuthenticated){
       this.$store.dispatch("getRoomById", this.$route.params.roomId);
         if (!this.$store.state.rooms.length) {
-      this.$store.dispatch("getCategoriesByRoomId", this.$route.params.roomId);
+      this.$store.dispatch("getMyRooms");
     } else {
       this.$store.dispatch(
       "setActiveRoom",
