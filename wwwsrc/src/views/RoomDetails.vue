@@ -61,7 +61,7 @@ export default {
   },
   methods:{
      addCategory() {
-       debugger
+      // RoomId comes in as string if reloaded on page
       this.$store.dispatch("addCategory", this.newCategory);
   },
    async getCategories(){
