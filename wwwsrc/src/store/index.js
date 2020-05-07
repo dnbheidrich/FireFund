@@ -62,6 +62,15 @@ export default new Vuex.Store({
         // router.push({ name: "Home" });
       }
     },
+    async getCategoriesByRoomId({ commit, dispatch }, id) {
+      try {
+        let res = await api.get("rooms/" + id + "/categories");
+        commit("setActiveRoom", res.data); 
+      } catch (error) {
+        console.error(error);
+        // router.push({ name: "Home" });
+      }
+    },
     setActiveRoom({ commit }, room) {
       commit("setActiveRoom", room);
     },
@@ -80,7 +89,7 @@ export default new Vuex.Store({
      async getCategoryById({ commit, dispatch }, id) {
       try {
         let res = await api.get("categories/" + id);
-        commit("setActiveCategory", res.data); 
+        commit("setCategories", res.data); 
       } catch (error) {
         console.error(error);
         // router.push({ name: "Home" });
