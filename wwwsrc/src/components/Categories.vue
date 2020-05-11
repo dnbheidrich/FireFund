@@ -7,6 +7,7 @@
       <div class="card-body">
         <h4 class="card-title">{{categoriesData.name}}</h4>
         <p class="card-text">{{categoriesData.description}}</p>
+        <button class="danger">Delete</button>
         </div>
   </div>
   </div>

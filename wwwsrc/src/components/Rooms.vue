@@ -11,6 +11,7 @@
       <div class="card-body">
         <h4 class="card-title">{{roomData.name}}</h4>
         <p class="card-text">{{roomData.description}}</p>
+        <button type="danger">Delete</button>
         </div>
   </div>
   </div>
