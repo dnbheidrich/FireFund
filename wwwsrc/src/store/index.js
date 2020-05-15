@@ -106,6 +106,14 @@ export default new Vuex.Store({
         console.log(error);
       }
     },
+    async deleteCategoryById({ commit, dispatch },  {id , roomId}) {
+      try {
+        let res = await api.delete("categories/" + id)
+        dispatch("getCategoriesByRoomId", roomId)
+      } catch (error) {
+        console.error(error);
+      }
+    },
   }
 });
 

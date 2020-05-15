@@ -7,7 +7,7 @@
       <div class="card-body">
         <h4 class="card-title">{{categoriesData.name}}</h4>
         <p class="card-text">{{categoriesData.description}}</p>
-        <button class="danger">Delete</button>
+        <button @click="deleteCategory" class="danger">Delete</button>
         </div>
   </div>
   </div>
@@ -25,7 +25,13 @@ export default {
     return {}
   },
   computed:{},
-  methods:{},
+  methods:{
+    deleteCategory(){
+     let id = this.categoriesData.id;
+     let roomId = this.categoriesData.roomId;
+      this.$store.dispatch("deleteCategoryById", {id, roomId});
+    }
+  },
   components:{}
 }
 </script>
