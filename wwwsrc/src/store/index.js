@@ -82,6 +82,14 @@ export default new Vuex.Store({
         console.log(error);
       }
     },
+    async deleteRoomById({ commit, dispatch },  id) {
+      try {
+        let res = await api.delete("rooms/" + id)
+        dispatch("getMyRooms")
+      } catch (error) {
+        console.error(error);
+      }
+    },
     async getMyCategories({ commit, dispatch }) {
       let res = await api.get("categories")
       commit("setCategories", res.data)

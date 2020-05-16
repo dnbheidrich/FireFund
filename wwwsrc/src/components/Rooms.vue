@@ -11,7 +11,7 @@
       <div class="card-body">
         <h4 class="card-title">{{roomData.name}}</h4>
         <p class="card-text">{{roomData.description}}</p>
-        <button type="danger">Delete</button>
+        <button @click="deleteRoom" type="danger">Delete</button>
         </div>
   </div>
   </div>
@@ -32,6 +32,10 @@ export default {
   props: ["roomData"],
   computed:{},
   methods:{
+    deleteRoom(){
+     let id = this.roomData.id;
+      this.$store.dispatch("deleteRoomById", id);
+    },
      addRoom() {
       this.$store.dispatch("addRoom", this.newRoom);
     },
