@@ -82,6 +82,14 @@ export default new Vuex.Store({
         console.log(error);
       }
     },
+    async deleteRoomById({ commit, dispatch },  id) {
+      try {
+        let res = await api.delete("rooms/" + id)
+        dispatch("getMyRooms")
+      } catch (error) {
+        console.error(error);
+      }
+    },
     async getMyCategories({ commit, dispatch }) {
       let res = await api.get("categories")
       commit("setCategories", res.data)
@@ -104,6 +112,14 @@ export default new Vuex.Store({
         commit("addCategory", res.data)
       } catch (error) {
         console.log(error);
+      }
+    },
+    async deleteCategoryById({ commit, dispatch },  {id , roomId}) {
+      try {
+        let res = await api.delete("categories/" + id)
+        dispatch("getCategoriesByRoomId", roomId)
+      } catch (error) {
+        console.error(error);
       }
     },
   }
