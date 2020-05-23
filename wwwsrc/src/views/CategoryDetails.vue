@@ -1,7 +1,7 @@
 <template>
   <div class="CategoryDetails">
 <h1>Create Item</h1>
-<form @submit.prevent="">
+<form @submit.prevent="addItem">
       <input
         v-model="newItem.Name"
         type="text"
@@ -41,14 +41,22 @@
       />
        <button type="submit" class="btn btn-success">Submit</button>
     </form>
-
+    <div class="row">
+      <items v-for="items in myItems" :key="items.id" :itemsData="itemsData" />
+    </div>
   </div>
 </template>
 
 
 <script>
+import Items from "../components/Items"
+
 export default {
   name: 'CategoryDetails',
+   mounted() {
+    this.getItems();
+    this.getCategories();
+  },
   data(){
     return {
       newItem: {
@@ -63,9 +71,43 @@ export default {
       },
     }
   },
-  computed:{},
-  methods:{},
-  components:{}
+  computed:{
+     categories() {
+      return this.$store.state.categories;
+    },
+    activeCategory(){
+      return this.$store.state.activeCategory;
+    },
+     myItems() {
+      return this.$store.state.items;
+    },
+  },
+  methods:{
+     addItem() {
+      this.$store.dispatch("addItem", this.newItem);
+  },
+   async getItems(){
+      if(await this.$auth.isAuthenticated){
+      this.$store.dispatch("getItemsByCategoryId", this.$route.params.categoryId);
+      }
+   },
+     async getCategories(){
+      if(await this.$auth.isAuthenticated){
+      this.$store.dispatch("getCategoryById", this.$route.params.categoryId);
+        if (!this.$store.state.rooms.length) {
+      this.$store.dispatch("getMyCategories");
+    } else {
+      this.$store.dispatch(
+      "setActiveCategory",
+      this.$store.state.rooms.find(c => c.id == this.$route.params.categoryId)
+      );
+    }
+      }
+  }
+  },
+  components:{
+    Items
+  }
 }
 </script>
 
