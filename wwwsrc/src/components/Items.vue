@@ -9,6 +9,8 @@
         <button type="danger">Delete</button>
         </div>
   </div>
+  </div>
+
 
   </div>
 </template>
