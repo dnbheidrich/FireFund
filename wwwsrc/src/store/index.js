@@ -134,7 +134,7 @@ export default new Vuex.Store({
       }
     },
     // Items
-    async getItemssByCategoriesId({ commit, dispatch }, id) {
+    async getItemsByCategoriesId({ commit, dispatch }, id) {
       try {
         let res = await api.get("categories/" + id + "/items");
         commit("setItems", res.data); 

@@ -19,6 +19,7 @@
 <script>
 export default {
   name: 'component',
+  props: ["itemsData"],
   data(){
     return {}
   },

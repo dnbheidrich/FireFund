@@ -22,27 +22,27 @@
         placeholder="ImgUrl..."
       />
       <input
-      v-model="newItem.Quantity"
-        type="number"
+      v-model.number="newItem.Quantity"
+        type= number
         name="year"
         placeholder="Quantity..."
       />
       <input
-      v-model="newItem.Acv"
-        type="number"
+      v-model.number="newItem.Acv"
+        type= number
         name="year"
         placeholder="Acv..."
       />
       <input
-      v-model="newItem.Rcv"
-        type="number"
+      v-model.number="newItem.Rcv"
+        type= number
         name="year"
         placeholder="Rcv..."
       />
        <button type="submit" class="btn btn-success">Submit</button>
     </form>
     <div class="row">
-      <items v-for="items in myItems" :key="items.id" :itemsData="itemsData" />
+      <items v-for="items in myItems" :key="items.id" :itemsData="items" />
     </div>
   </div>
 </template>
@@ -89,7 +89,7 @@ export default {
   },
    async getItems(){
       if(await this.$auth.isAuthenticated){
-      this.$store.dispatch("getItemsByCategoryId", this.$route.params.categoryId);
+      this.$store.dispatch("getItemsByCategoriesId", this.$route.params.categoryId);
       }
    },
      async getCategories(){
