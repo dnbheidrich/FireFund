@@ -64,9 +64,9 @@ export default {
         Description: "",
         ImgUrl: "",
         CategoryId: this.$route.params.categoryId,
-        Quantity: "",
-        Acv:"",
-        Rcv:"",
+        Quantity: parseInt(),
+        Acv: parseInt(),
+        Rcv: parseInt(),
 
       },
     }
@@ -84,6 +84,7 @@ export default {
   },
   methods:{
      addItem() {
+       debugger
       this.$store.dispatch("addItem", this.newItem);
   },
    async getItems(){
