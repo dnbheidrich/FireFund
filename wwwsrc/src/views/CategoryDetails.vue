@@ -1,6 +1,6 @@
 <template>
   <div class="CategoryDetails">
-<h1 class="text-white text-center">Create Item</h1>
+<h1 class="text-center text-warning">Create Item</h1>
 <form class="text-center" @submit.prevent="addItem">
       <input
         v-model="newItem.Name"
