@@ -20,7 +20,9 @@ export default new Vuex.Store({
     rooms: [],
     activeRoom:{},
     categories: [],
-    activeCategory:{}
+    activeCategory:{},
+    items:{},
+    activeItem:{}
   },
   mutations: {
     setRooms(state, rooms) {
@@ -40,6 +42,15 @@ export default new Vuex.Store({
     },
     addCategory(state, newCategories) {
       state.rooms.push(newCategories)
+    },
+    setItems(state, items) {
+      state.items = items
+    },
+    setActiveItem(state, item) {
+      state.activeItem = item;
+    },
+    addItem(state, newItem) {
+      state.items.push(newItem)
     },
   },
   actions: {
@@ -118,6 +129,48 @@ export default new Vuex.Store({
       try {
         let res = await api.delete("categories/" + id)
         dispatch("getCategoriesByRoomId", roomId)
+      } catch (error) {
+        console.error(error);
+      }
+    },
+    // Items
+    async getItemsByCategoriesId({ commit, dispatch }, id) {
+      try {
+        let res = await api.get("categories/" + id + "/items");
+        commit("setItems", res.data); 
+      } catch (error) {
+        console.error(error);
+        // router.push({ name: "Home" });
+      }
+    },
+    async getMyItems({ commit, dispatch }) {
+      let res = await api.get("items")
+      commit("setItems", res.data)
+    },
+     async getItemById({ commit, dispatch }, id) {
+      try {
+        let res = await api.get("items/" + id);
+        commit("setItems", res.data); 
+      } catch (error) {
+        console.error(error);
+        // router.push({ name: "Home" });
+      }
+    },
+    setActiveItem({ commit }, items) {
+      commit("setActiveItem", items);
+    },
+    async addItem({commit, dispatch}, newItem){
+      try {
+        let res = await api.post("items", newItem )
+        commit("addItem", res.data)
+      } catch (error) {
+        console.log(error);
+      }
+    },
+    async deleteItemById({ commit, dispatch },  {id , roomId}) {
+      try {
+        let res = await api.delete("items/" + id)
+        dispatch("getItemsByRoomId", roomId)
       } catch (error) {
         console.error(error);
       }

@@ -1,10 +1,10 @@
 <template>
   <div class="component">
 
-<h1 class="text-white">Welcome to {{activeRoom.name}}</h1>
+<h1 class="text-center text-warning">Welcome to {{activeRoom.name}}</h1>
 
-<h1>Create Category</h1>
-<form @submit.prevent="addCategory">
+<h1 class="text-center text-warning">Create Category</h1>
+<form class="text-center" @submit.prevent="addCategory">
       <input
         v-model="newCategory.Name"
         type="text"
@@ -86,7 +86,8 @@ export default {
       );
     }
       }
-  }
+  },
+  
   },
   components:{
     Categories

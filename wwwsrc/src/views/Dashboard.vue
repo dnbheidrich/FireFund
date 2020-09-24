@@ -2,7 +2,7 @@
   <div class="dashboard container-fluid">
     <div class="row text-center">
       <div class="col-12">
-    <h1 class="text-warning">WELCOME TO THE DASHBOARD</h1>
+    <h1 class="text-center text-warning">WELCOME TO THE DASHBOARD</h1>
       </div>
     </div>
     <div class="row text-center">
@@ -10,7 +10,7 @@
 
 
 
-<h1>Create Room</h1>
+<h1 class="text-center text-warning">Create Room</h1>
 <form @submit.prevent="addRoom">
       <input
         v-model="newRoom.Name"
