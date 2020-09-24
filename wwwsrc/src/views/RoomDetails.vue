@@ -10,7 +10,6 @@
         type="text"
         name="make"
         placeholder="Name..."
-        
       />
       <input
        v-model="newCategory.Description" required
