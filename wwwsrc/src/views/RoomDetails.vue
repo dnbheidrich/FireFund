@@ -1,10 +1,10 @@
 <template>
   <div class="component">
 
-<h1 class="text-white">Welcome to {{activeRoom.name}}</h1>
+<h1 class="text-white text-center">Welcome to {{activeRoom.name}}</h1>
 
-<h1 class="text-white">Create Category</h1>
-<form @submit.prevent="addCategory">
+<h1 class="text-white text-center">Create Category</h1>
+<form class="text-center" @submit.prevent="addCategory">
       <input
         v-model="newCategory.Name"
         type="text"
