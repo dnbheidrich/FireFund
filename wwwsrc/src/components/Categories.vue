@@ -1,6 +1,6 @@
 <template>
   <div class="categories">
- <div class="col-12">
+ <div class="col-6">
      <div class="card">
  <router-link
         :to="{ name: 'CategoryDetails', params: { categoryId: this.categoriesData.id } }"
